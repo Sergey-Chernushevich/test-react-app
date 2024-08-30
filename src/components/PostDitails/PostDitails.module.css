@@ -1,0 +1,26 @@
+.postDitails {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 5%;
+  color: #ffffff;
+  min-height: calc(100dvh - 70px);
+}
+
+.postDitails__wrapp {
+  width: 70%;
+  margin-bottom: 30px;
+}
+
+.postDitails__title {
+  text-align: center;
+  font-size: 55px;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+.postDitails__body {
+  font-size: 30px;
+  text-align: justify;
+}

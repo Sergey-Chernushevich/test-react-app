@@ -1,0 +1,13 @@
+.postPage {
+  min-height: calc(100dvh - 70px);
+}
+
+.loading {
+  text-align: center;
+}
+
+.error {
+  color: red;
+  text-align: center;
+  margin-top: 50px;
+}

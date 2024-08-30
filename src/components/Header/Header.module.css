@@ -1,0 +1,36 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 5%;
+  height: 70px;
+  position: relative;
+  color: #ffffff;
+  background-color: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(5px);
+}
+
+.header__logo {
+  margin-right: 20px;
+  transition: 0.2s;
+}
+
+.header__logo:hover {
+  transform: scale(1.1);
+  transition: 0.2s;
+}
+
+@media (max-width: 576px) {
+  .header {
+    flex-direction: column;
+    justify-content: center;
+    height: 150px;
+    padding: 10px 5%;
+  }
+
+  .header__logo {
+    width: 100%;
+    margin-right: 0;
+    margin-bottom: 25px;
+  }
+}
