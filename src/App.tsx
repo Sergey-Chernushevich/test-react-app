@@ -1,14 +1,23 @@
 import { Route, Routes } from "react-router-dom";
-import { useAppSelector} from "./store/hook";
+import { useAppSelector, useAppDispatch} from "./store/hook";
 import './App.css';
 import AuthPage from './components/AuthPage/AuthPage';
 import Header from './components/Header/Header';
 import PostsPage from './components/PostsPage/PostsPage';
 import PostDitails from "./components/PostDitails/PostDitails";
+import { useEffect } from "react";
+import {  fetchPosts } from "./store/postsSlice";
+
 
 
 function App() {
   const {list} = useAppSelector((state) => state.posts);
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    dispatch(fetchPosts());
+  }, [dispatch]);
+
+
 
   return (
     <div className="App">
@@ -21,10 +30,9 @@ function App() {
           return(
             <Route 
             key={post.id} 
-            path={`/posts/${post.id}`} 
+            path={`posts/:${post.id}`} 
             element={<PostDitails
-              title={post.title}
-              body={post.body}
+              postId={post.id} 
             />}
             />
           )

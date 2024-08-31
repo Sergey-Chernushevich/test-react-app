@@ -9,7 +9,7 @@ function PostsContainer({ posts }:any ) {
     
       {posts.map((post:PostType)=>{
         return(
-          <Link className={classes.postLink} to={`/posts/${post.id}`} key={post.id}>
+          <Link className={classes.postLink} to={`./posts/${post.id}`} key={post.id}>
           <Post  title={post.title} body={post.body}/>
           </Link>
         )

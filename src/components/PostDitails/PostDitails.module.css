@@ -23,4 +23,7 @@
 .postDitails__body {
   font-size: 30px;
   text-align: justify;
+  border-bottom: 1px solid #ffffff;
+  padding-bottom: 15px;
+  margin-bottom: 15px;
 }

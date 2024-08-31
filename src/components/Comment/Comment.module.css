@@ -1,0 +1,24 @@
+.comment {
+  background-color: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(5px);
+  border-radius: 5px;
+  margin-bottom: 20px;
+  padding: 10px;
+}
+.comment__name {
+  font-weight: bold;
+  font-size: 18px;
+  border-bottom: 1px solid #ffffff;
+  padding-bottom: 10px;
+}
+
+.comment__body {
+  text-align: justify;
+  padding: 10px 0;
+  border-bottom: 1px solid #ffffff;
+}
+
+.comment__email {
+  text-align: right;
+  padding-top: 5px;
+}

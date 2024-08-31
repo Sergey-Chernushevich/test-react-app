@@ -7,15 +7,26 @@ export type Post={
   body: string,
 }
 
+export type PostDitails={
+  postId:number,
+  id: number,
+  name: string,
+  email:string,
+  body: string,
+}
+
 type PostsState={
   list: Post[],
   status: null|string,
   error: any,
+  post: any,
 }
+
 const initialState : PostsState={
   list:[],
   status:null,
   error: null,
+  post:null,
 }
 
 export const fetchPosts = createAsyncThunk<Post[], void, { rejectValue: string }>(
@@ -33,46 +44,30 @@ export const fetchPosts = createAsyncThunk<Post[], void, { rejectValue: string }
     }
   }
 );
-// export const fetchPosts = createAsyncThunk(
-//   "posts/fetchPosts",
-//   async function (_, { rejectWithValue }) {
-//     try {
-//       const response = await fetch(
-//         "https://jsonplaceholder.typicode.com/posts_limit=10"
-//       );
-//       if (!response.ok) {
-//         throw new Error("Server Error");
-//       }
-//       const data = await response.json();
-//       return data;
-//     } catch (error) {
-//       return rejectWithValue(error.message);
-//     }
-//   }
-// );
 
-
+export const fetchPostDitails = createAsyncThunk<string[], number, { rejectValue: string }>(
+  "auth/fetchPostDitails",
+  async (id: number, { rejectWithValue }) => {
+    try {
+      const response = await fetch(`https://jsonplaceholder.typicode.com/comments?postId=${id}`);
+      if (!response.ok) {
+        throw new Error("Server Error");
+      }
+      const data = await response.json();
+    if(!data.length){
+      throw new Error("Ничего не найдено(");
+    }
+      return data;
+    } catch (error: any) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
 
 const postsSlice = createSlice({
   name: "posts",
   initialState,
   reducers: {
-    // addTodo(state, action:PayloadAction<string>) {
-    //   state.todos.push({
-    //     id: new Date().toISOString(),
-    //     title: action.payload,
-    //     completed: false,
-    //   });
-    // },
-    // removeTodo(state, action) {
-    //   state.todos = state.todos.filter((todo) => todo.id !== action.payload.id);
-    // },
-    // toggleTodoCompleted(state, action) {
-    //   const toggledTodo = state.todos.find(
-    //     (todo) => todo.id === action.payload.id
-    //   );
-    //   toggledTodo.completed = !toggledTodo.completed;
-    // },
   },
   extraReducers: (builder) => {
     builder
@@ -85,6 +80,20 @@ const postsSlice = createSlice({
         state.list = action.payload;
       })
       .addCase(fetchPosts.rejected, (state, action) => {
+        state.status = "rejected";
+        state.error = action.payload;
+      })
+
+      .addCase(fetchPostDitails.pending, (state) => {
+        state.status  = "loading";
+        state.error = null;
+      })
+      .addCase(fetchPostDitails.fulfilled, (state, action) => {
+        state.status = "resolved";
+        state.post = action.payload;
+        
+      })
+      .addCase(fetchPostDitails.rejected, (state, action) => {
         state.status = "rejected";
         state.error = action.payload;
       });

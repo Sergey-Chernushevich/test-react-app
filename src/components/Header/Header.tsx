@@ -7,7 +7,7 @@ import { logOut } from "../../store/authSlise";
 
 function Header() {
   const dispatch=useAppDispatch()
-  const {user,status,error} = useAppSelector((state) => state.auth);
+  const {user} = useAppSelector((state) => state.auth);
 
   let ButtonTitle = 'Sign In';
   if(user){

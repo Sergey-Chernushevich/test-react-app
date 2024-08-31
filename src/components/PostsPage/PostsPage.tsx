@@ -1,16 +1,10 @@
 import PostsContainer from '../PostsContainer/PostsContainer'
 import classes from './PostsPage.module.css'
-import { useEffect } from "react";
-import {useAppDispatch, useAppSelector} from "../../store/hook";
-import {  fetchPosts } from "../../store/postsSlice";
+import { useAppSelector} from "../../store/hook";
 
 function PostPage() {
 
   const {list, status, error } = useAppSelector((state) => state.posts);
-  const dispatch = useAppDispatch();
-  useEffect(() => {
-    dispatch(fetchPosts());
-  }, [dispatch]);
 
   return (
     <section className={classes.postPage}>
